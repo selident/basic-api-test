@@ -12,6 +12,7 @@ import java.util.Date;
 public class AuthorizationServiceImplServiceTest {
 
     private static final String BASE_URL = "http://5df9c4eee9f79e0014b6b2eb.mockapi.io/charge/{credit_card_id}";
+
     AuthorizationService authorizationService = new AuthorizationServiceImpl(BASE_URL);
 
     @Test

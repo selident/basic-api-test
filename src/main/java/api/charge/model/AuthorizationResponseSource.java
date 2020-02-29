@@ -2,6 +2,10 @@ package api.charge.model;
 
 import org.testng.Assert;
 
+/**
+ * Charge Authorization Response Source Object
+ * The model to store values from JSON API response as a object - deserialize process
+ */
 public class AuthorizationResponseSource {
 
     private String id;
@@ -50,7 +54,9 @@ public class AuthorizationResponseSource {
 
     private String tokenization_method;
 
-    // Getters & Setters
+    /**
+     * Getters and Setters
+     */
     public String getId() {
         return id;
     }
@@ -236,8 +242,8 @@ public class AuthorizationResponseSource {
     }
 
     /**
-     * Compare two objects, throw exception if any non-matched field
-     * @param expectedSource
+     * Compare this object with another one, throw exception if any non-matched field
+     * @param expectedSource expected source object
      */
     public void assertEquals(AuthorizationResponseSource expectedSource) {
 

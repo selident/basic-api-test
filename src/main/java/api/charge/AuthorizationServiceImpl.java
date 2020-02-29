@@ -7,9 +7,13 @@ import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 
+/**
+ * Implementation of Charge Authorization Service
+ */
 public class AuthorizationServiceImpl implements AuthorizationService {
 
     private final static Logger logger = Logger.getLogger(AuthorizationServiceImpl.class);
+
     private String baseURL;
 
     public AuthorizationServiceImpl(String baseURL) {

@@ -4,6 +4,10 @@ import org.testng.Assert;
 
 import java.util.Date;
 
+/**
+ * Charge Authorization Response Object
+ * The model to store values from JSON API response as a object - deserialize process
+ */
 public class AuthorizationResponse {
 
     private String id;
@@ -28,7 +32,9 @@ public class AuthorizationResponse {
 
     private AuthorizationResponseError error;
 
-    // Getters & Setters
+    /**
+     * Getters and Setters
+     */
     public String getId() {
         return id;
     }
@@ -123,8 +129,8 @@ public class AuthorizationResponse {
     }
 
     /**
-     * Compare two objects, throw exception if any non-matched field
-     * @param expectedResponse
+     * Compare this object with another one, throw exception if any non-matched field
+     * @param expectedResponse expected data object
      */
     public void assertEquals(AuthorizationResponse expectedResponse) {
 

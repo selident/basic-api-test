@@ -2,13 +2,19 @@ package api.charge.model;
 
 import org.testng.Assert;
 
+/**
+ * Charge Authorization Response Error Object
+ * The model to store values from JSON API response as a object - deserialize process
+ */
 public class AuthorizationResponseError {
 
     private String message;
 
     private String type;
 
-    // Getters & Setters
+    /**
+     * Getters and Setters
+     */
     public String getMessage() {
         return message;
     }
@@ -26,8 +32,8 @@ public class AuthorizationResponseError {
     }
 
     /**
-     * Compare two objects, throw exception if any non-matched field
-     * @param expectedError
+     * Compare this object with another one, throw exception if any non-matched field
+     * @param expectedError expected error object
      */
     public void assertEquals(AuthorizationResponseError expectedError) {
 
