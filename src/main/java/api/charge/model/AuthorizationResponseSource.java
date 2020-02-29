@@ -1,5 +1,7 @@
 package api.charge.model;
 
+import org.testng.Assert;
+
 public class AuthorizationResponseSource {
 
     private String id;
@@ -231,5 +233,44 @@ public class AuthorizationResponseSource {
 
     public void setTokenizationMethod(String tokenizationMethod) {
         this.tokenization_method = tokenizationMethod;
+    }
+
+    /**
+     * Compare two objects, throw exception if any non-matched field
+     * @param expectedSource
+     */
+    public void assertEquals(AuthorizationResponseSource expectedSource) {
+
+        Assert.assertEquals(this.getId(), expectedSource.getId());
+        Assert.assertEquals(this.getObject(), expectedSource.getObject());
+        Assert.assertEquals(this.getAddressCity(), expectedSource.getAddressCity());
+        Assert.assertEquals(this.getAddressCountry(), expectedSource.getAddressCountry());
+        Assert.assertEquals(this.getAddressLine1(), expectedSource.getAddressLine1());
+        Assert.assertEquals(this.getAddressLine1Check(), expectedSource.getAddressLine1Check());
+        Assert.assertEquals(this.getAddressLine2(), expectedSource.getAddressLine2());
+        Assert.assertEquals(this.getAddressState(), expectedSource.getAddressState());
+        Assert.assertEquals(this.getAddressZip(), expectedSource.getAddressZip());
+        Assert.assertEquals(this.getAddressZipCheck(), expectedSource.getAddressZipCheck());
+
+        Assert.assertEquals(this.getBrand(), expectedSource.getBrand());
+        Assert.assertEquals(this.getCountry(), expectedSource.getCountry());
+        Assert.assertEquals(this.getCustomer(), expectedSource.getCustomer());
+        Assert.assertEquals(this.getCvcCheck(), expectedSource.getCvcCheck());
+        Assert.assertEquals(this.getDynamicLast4(), expectedSource.getDynamicLast4());
+
+        Assert.assertEquals(this.getExpMonth(), expectedSource.getExpMonth());
+        Assert.assertEquals(this.getExpYear(), expectedSource.getExpYear());
+        Assert.assertEquals(this.getFingerPrint(), expectedSource.getFingerPrint());
+        Assert.assertEquals(this.getFunding(), expectedSource.getFunding());
+        Assert.assertEquals(this.getLast4(), expectedSource.getLast4());
+
+        if (this.getMetadata() != null) {
+            Assert.assertNotNull(expectedSource.getMetadata());
+        } else {
+            Assert.assertNull(expectedSource.getMetadata());
+        }
+
+        Assert.assertEquals(this.getName(), expectedSource.getName());
+        Assert.assertEquals(this.getTokenizationMethod(), expectedSource.getTokenizationMethod());
     }
 }

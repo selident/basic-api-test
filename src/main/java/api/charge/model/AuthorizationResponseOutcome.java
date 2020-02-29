@@ -1,5 +1,7 @@
 package api.charge.model;
 
+import org.testng.Assert;
+
 public class AuthorizationResponseOutcome {
 
     private String network_status;
@@ -61,5 +63,19 @@ public class AuthorizationResponseOutcome {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    /**
+     * Compare two objects, throw exception if any non-matched field
+     * @param expectedOutcome
+     */
+    public void assertEquals(AuthorizationResponseOutcome expectedOutcome) {
+
+        Assert.assertEquals(this.getNetworkStatus(), expectedOutcome.getNetworkStatus());
+        Assert.assertEquals(this.getReason(), expectedOutcome.getReason());
+        Assert.assertEquals(this.getRiskLevel(), expectedOutcome.getRiskLevel());
+        Assert.assertEquals(this.getRiskScore(), expectedOutcome.getRiskScore());
+        Assert.assertEquals(this.getSellerMessage(), expectedOutcome.getSellerMessage());
+        Assert.assertEquals(this.getType(), expectedOutcome.getType());
     }
 }

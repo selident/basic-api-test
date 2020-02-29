@@ -1,5 +1,7 @@
 package api.charge.model;
 
+import org.testng.Assert;
+
 import java.util.Date;
 
 public class AuthorizationResponse {
@@ -20,11 +22,11 @@ public class AuthorizationResponse {
 
     private String status;
 
-    AuthorizationResponseOutcome outcome;
+    private AuthorizationResponseOutcome outcome;
 
-    AuthorizationResponseSource source;
+    private AuthorizationResponseSource source;
 
-    AuthorizationResponseError error;
+    private AuthorizationResponseError error;
 
     // Getters & Setters
     public String getId() {
@@ -101,7 +103,7 @@ public class AuthorizationResponse {
     }
 
     public void setOutcome(AuthorizationResponseOutcome outcome) {
-        outcome = outcome;
+        this.outcome = outcome;
     }
 
     public AuthorizationResponseSource getSource() {
@@ -109,7 +111,7 @@ public class AuthorizationResponse {
     }
 
     public void setSource(AuthorizationResponseSource source) {
-        source = source;
+        this.source = source;
     }
 
     public AuthorizationResponseError getError() {
@@ -117,6 +119,40 @@ public class AuthorizationResponse {
     }
 
     public void setError(AuthorizationResponseError error) {
-        error = error;
+        this.error = error;
+    }
+
+    /**
+     * Compare two objects, throw exception if any non-matched field
+     * @param expectedResponse
+     */
+    public void assertEquals(AuthorizationResponse expectedResponse) {
+
+        Assert.assertEquals(this.getId(), expectedResponse.getId());
+        Assert.assertEquals(this.getObject(), expectedResponse.getObject());
+        Assert.assertEquals(this.getAmount(), expectedResponse.getAmount());
+        Assert.assertEquals(this.getCreated(), expectedResponse.getCreated());
+        Assert.assertEquals(this.getCurrency(), expectedResponse.getCurrency());
+        Assert.assertEquals(this.getCustomer(), expectedResponse.getCustomer());
+        Assert.assertEquals(this.getDescription(), expectedResponse.getDescription());
+        Assert.assertEquals(this.getStatus(), expectedResponse.getStatus());
+
+        if (this.getOutcome() != null) {
+            this.getOutcome().assertEquals(expectedResponse.getOutcome());
+        } else {
+            Assert.assertNull(expectedResponse.getOutcome());
+        }
+
+        if (this.getSource() != null) {
+            this.getSource().assertEquals(expectedResponse.getSource());
+        } else {
+            Assert.assertNull(expectedResponse.getSource());
+        }
+
+        if (this.getError() != null) {
+            this.getError().assertEquals(expectedResponse.getError());
+        } else {
+            Assert.assertNull(expectedResponse.getError());
+        }
     }
 }

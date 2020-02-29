@@ -1,6 +1,6 @@
 package api.charge;
 
-import api.charge.model.AuthorizationResponse;
+import api.charge.model.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -26,21 +26,18 @@ public class AuthorizationServiceImplServiceTest {
         // Deserialize JSON response
         AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
 
-        // Assert response values
-        Assert.assertNull(authorizationResponse.getId());
-        Assert.assertNull(authorizationResponse.getObject());
-        Assert.assertEquals(authorizationResponse.getAmount(), 0f);
-        Assert.assertEquals(authorizationResponse.getCreated(), 0);
-        Assert.assertNull(authorizationResponse.getCurrency());
-        Assert.assertNull(authorizationResponse.getCustomer());
-        Assert.assertNull(authorizationResponse.getDescription());
-        Assert.assertNull(authorizationResponse.getStatus());
+        // Prepare expected data
+        AuthorizationResponse expectedResponse = new AuthorizationResponse();
+        expectedResponse.setAmount(0f);
+        expectedResponse.setCreated(0);
 
-        Assert.assertNull(authorizationResponse.getOutcome());
-        Assert.assertNull(authorizationResponse.getSource());
+        AuthorizationResponseError error = new AuthorizationResponseError();
+        error.setMessage("Invalid Primary Account Number provided");
+        error.setType("invalid_request_error");
+        expectedResponse.setError(error);
 
-        Assert.assertEquals(authorizationResponse.getError().getMessage(), "Invalid Primary Account Number provided");
-        Assert.assertEquals(authorizationResponse.getError().getType(), "invalid_request_error");
+        // Assertion
+        expectedResponse.assertEquals(authorizationResponse);
     }
 
     @Test
@@ -55,22 +52,20 @@ public class AuthorizationServiceImplServiceTest {
         // Deserialize JSON response
         AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
 
-        // Assert response values
-        Assert.assertEquals(authorizationResponse.getId(), "ch_2DiD402eZvKYlo1Cz8XicVgK");
-        Assert.assertNull(authorizationResponse.getObject());
-        Assert.assertEquals(authorizationResponse.getAmount(), 0f);
-        Assert.assertEquals(authorizationResponse.getCreated(), 0);
-        Assert.assertNull(authorizationResponse.getCurrency());
-        Assert.assertNull(authorizationResponse.getCustomer());
-        Assert.assertNull(authorizationResponse.getDescription());
-        Assert.assertNull(authorizationResponse.getStatus());
+        // Prepare expected data
+        AuthorizationResponse expectedResponse = new AuthorizationResponse();
+        expectedResponse.setId("ch_2DiD402eZvKYlo1Cz8XicVgK");
+        expectedResponse.setAmount(0f);
+        expectedResponse.setCreated(0);
 
-        Assert.assertEquals(authorizationResponse.getOutcome().getNetworkStatus(), "declined_by_network");
-        Assert.assertEquals(authorizationResponse.getOutcome().getReason(), "stolen_card");
-        Assert.assertEquals(authorizationResponse.getOutcome().getType(), "issuer_declined");
+        AuthorizationResponseOutcome outcome = new AuthorizationResponseOutcome();
+        outcome.setNetworkStatus("declined_by_network");
+        outcome.setReason("stolen_card");
+        outcome.setType("issuer_declined");
+        expectedResponse.setOutcome(outcome);
 
-        Assert.assertNull(authorizationResponse.getSource());
-        Assert.assertNull(authorizationResponse.getError());
+        // Assertion
+        expectedResponse.assertEquals(authorizationResponse);
     }
 
     @Test
@@ -85,22 +80,20 @@ public class AuthorizationServiceImplServiceTest {
         // Deserialize JSON response
         AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
 
-        // Assert response values
-        Assert.assertEquals(authorizationResponse.getId(), "ch_1DiD402eZvKYlo2Cz8XicVgK");
-        Assert.assertNull(authorizationResponse.getObject());
-        Assert.assertEquals(authorizationResponse.getAmount(), 0f);
-        Assert.assertEquals(authorizationResponse.getCreated(), 0);
-        Assert.assertNull(authorizationResponse.getCurrency());
-        Assert.assertNull(authorizationResponse.getCustomer());
-        Assert.assertNull(authorizationResponse.getDescription());
-        Assert.assertNull(authorizationResponse.getStatus());
+        // Prepare expected data
+        AuthorizationResponse expectedResponse = new AuthorizationResponse();
+        expectedResponse.setId("ch_1DiD402eZvKYlo2Cz8XicVgK");
+        expectedResponse.setAmount(0f);
+        expectedResponse.setCreated(0);
 
-        Assert.assertEquals(authorizationResponse.getOutcome().getNetworkStatus(), "declined_by_network");
-        Assert.assertEquals(authorizationResponse.getOutcome().getReason(), "insufficient_funds");
-        Assert.assertEquals(authorizationResponse.getOutcome().getType(), "issuer_declined");
+        AuthorizationResponseOutcome outcome = new AuthorizationResponseOutcome();
+        outcome.setNetworkStatus("declined_by_network");
+        outcome.setReason("insufficient_funds");
+        outcome.setType("issuer_declined");
+        expectedResponse.setOutcome(outcome);
 
-        Assert.assertNull(authorizationResponse.getSource());
-        Assert.assertNull(authorizationResponse.getError());
+        // Assertion
+        expectedResponse.assertEquals(authorizationResponse);
     }
 
     @Test
@@ -115,22 +108,20 @@ public class AuthorizationServiceImplServiceTest {
         // Deserialize JSON response
         AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
 
-        // Assert response values
-        Assert.assertEquals(authorizationResponse.getId(), "ch_1DiD402qZ2KYlo2Cz8XicVgK");
-        Assert.assertNull(authorizationResponse.getObject());
-        Assert.assertEquals(authorizationResponse.getAmount(), 0f);
-        Assert.assertEquals(authorizationResponse.getCreated(), 0);
-        Assert.assertNull(authorizationResponse.getCurrency());
-        Assert.assertNull(authorizationResponse.getCustomer());
-        Assert.assertNull(authorizationResponse.getDescription());
-        Assert.assertNull(authorizationResponse.getStatus());
+        // Prepare expected data
+        AuthorizationResponse expectedResponse = new AuthorizationResponse();
+        expectedResponse.setId("ch_1DiD402qZ2KYlo2Cz8XicVgK");
+        expectedResponse.setAmount(0f);
+        expectedResponse.setCreated(0);
 
-        Assert.assertEquals(authorizationResponse.getOutcome().getNetworkStatus(), "declined_by_network");
-        Assert.assertEquals(authorizationResponse.getOutcome().getReason(), "lost_card");
-        Assert.assertEquals(authorizationResponse.getOutcome().getType(), "issuer_declined");
+        AuthorizationResponseOutcome outcome = new AuthorizationResponseOutcome();
+        outcome.setNetworkStatus("declined_by_network");
+        outcome.setReason("lost_card");
+        outcome.setType("issuer_declined");
+        expectedResponse.setOutcome(outcome);
 
-        Assert.assertNull(authorizationResponse.getSource());
-        Assert.assertNull(authorizationResponse.getError());
+        // Assertion
+        expectedResponse.assertEquals(authorizationResponse);
     }
 
     @Test
@@ -145,22 +136,24 @@ public class AuthorizationServiceImplServiceTest {
         // Deserialize JSON response
         AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
 
-        // Assert response values
-        Assert.assertEquals(authorizationResponse.getId(), "ch_1DiD402eZvKY123Cz8XicVgK");
-        Assert.assertEquals(authorizationResponse.getObject(), "charge");
-        Assert.assertEquals(authorizationResponse.getAmount(), 999f);
-        Assert.assertEquals(authorizationResponse.getCreated(), 1545018400);
-        Assert.assertEquals(authorizationResponse.getCurrency(), "usd");
-        Assert.assertNull(authorizationResponse.getCustomer());
-        Assert.assertEquals(authorizationResponse.getDescription(), "Blocked charge");
-        Assert.assertEquals(authorizationResponse.getStatus(), "blocked");
+        // Prepare expected data
+        AuthorizationResponse expectedResponse = new AuthorizationResponse();
+        expectedResponse.setId("ch_1DiD402eZvKY123Cz8XicVgK");
+        expectedResponse.setObject("charge");
+        expectedResponse.setAmount(999f);
+        expectedResponse.setCreated(1545018400);
+        expectedResponse.setCurrency("usd");
+        expectedResponse.setDescription("Blocked charge");
+        expectedResponse.setStatus("blocked");
 
-        Assert.assertEquals(authorizationResponse.getOutcome().getNetworkStatus(), "not_sent_to_network");
-        Assert.assertEquals(authorizationResponse.getOutcome().getReason(), "highest_risk_level");
-        Assert.assertEquals(authorizationResponse.getOutcome().getType(), "blocked");
+        AuthorizationResponseOutcome outcome = new AuthorizationResponseOutcome();
+        outcome.setNetworkStatus("not_sent_to_network");
+        outcome.setReason("highest_risk_level");
+        outcome.setType("blocked");
+        expectedResponse.setOutcome(outcome);
 
-        Assert.assertNull(authorizationResponse.getSource());
-        Assert.assertNull(authorizationResponse.getError());
+        // Assertion
+        expectedResponse.assertEquals(authorizationResponse);
 
         // This is additional assertion. I created a method getCreatedCreatedDate so that we can get the data with Date type.
         // In the real case, the created time will be changed for every API call, the way we assert in that case will be different.
@@ -179,52 +172,39 @@ public class AuthorizationServiceImplServiceTest {
         // Deserialize JSON response
         AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
 
-        // Assert response values
-        Assert.assertEquals(authorizationResponse.getId(), "ch_1DiD402eZvKYlo2Cz8XicVgK");
-        Assert.assertEquals(authorizationResponse.getObject(), "charge");
-        Assert.assertEquals(authorizationResponse.getAmount(), 999f);
-        Assert.assertEquals(authorizationResponse.getCreated(), 1545018400);
-        Assert.assertEquals(authorizationResponse.getCurrency(), "usd");
-        Assert.assertNull(authorizationResponse.getCustomer());
-        Assert.assertEquals(authorizationResponse.getDescription(), "Successful charge");
-        Assert.assertEquals(authorizationResponse.getStatus(), "succeeded");
+        // Prepare expected data
+        AuthorizationResponse expectedResponse = new AuthorizationResponse();
+        expectedResponse.setId("ch_1DiD402eZvKYlo2Cz8XicVgK");
+        expectedResponse.setObject("charge");
+        expectedResponse.setAmount(999f);
+        expectedResponse.setCreated(1545018400);
+        expectedResponse.setCurrency("usd");
+        expectedResponse.setDescription("Successful charge");
+        expectedResponse.setStatus("succeeded");
 
-        Assert.assertEquals(authorizationResponse.getOutcome().getNetworkStatus(), "approved_by_network");
-        Assert.assertNull(authorizationResponse.getOutcome().getReason());
-        Assert.assertEquals(authorizationResponse.getOutcome().getRiskLevel(), "normal");
-        Assert.assertEquals(authorizationResponse.getOutcome().getRiskScore(), 64);
-        Assert.assertEquals(authorizationResponse.getOutcome().getSellerMessage(), "Payment complete.");
-        Assert.assertEquals(authorizationResponse.getOutcome().getType(), "authorized");
+        AuthorizationResponseOutcome outcome = new AuthorizationResponseOutcome();
+        outcome.setNetworkStatus("approved_by_network");
+        outcome.setRiskLevel("normal");
+        outcome.setRiskScore(64);
+        outcome.setSellerMessage("Payment complete.");
+        outcome.setType("authorized");
+        expectedResponse.setOutcome(outcome);
 
-        Assert.assertEquals(authorizationResponse.getSource().getId(), "card_1DiD3z2eZvKYlo2CilH44yQY");
-        Assert.assertEquals(authorizationResponse.getSource().getObject(), "card");
-        Assert.assertNull(authorizationResponse.getSource().getAddressCity());
-        Assert.assertNull(authorizationResponse.getSource().getAddressCountry());
-        Assert.assertNull(authorizationResponse.getSource().getAddressLine1());
-        Assert.assertNull(authorizationResponse.getSource().getAddressLine1Check());
-        Assert.assertNull(authorizationResponse.getSource().getAddressLine2());
-        Assert.assertNull(authorizationResponse.getSource().getAddressState());
-        Assert.assertNull(authorizationResponse.getSource().getAddressZip());
-        Assert.assertNull(authorizationResponse.getSource().getAddressZipCheck());
+        AuthorizationResponseSource source = new AuthorizationResponseSource();
+        source.setId("card_1DiD3z2eZvKYlo2CilH44yQY");
+        source.setObject("card");
+        source.setBrand("Visa");
+        source.setCountry("US");
+        source.setExpMonth(12);
+        source.setExpYear(2019);
+        source.setFingerprint("Xt5EWLLDS7FJjR1c");
+        source.setFunding("credit");
+        source.setLast4("4242");
+        source.setMetadata(new AuthorizationResponseSourceMetadata());
+        expectedResponse.setSource(source);
 
-        Assert.assertEquals(authorizationResponse.getSource().getBrand(), "Visa");
-        Assert.assertEquals(authorizationResponse.getSource().getCountry(), "US");
-        Assert.assertNull(authorizationResponse.getSource().getCustomer());
-        Assert.assertNull(authorizationResponse.getSource().getCvcCheck());
-        Assert.assertNull(authorizationResponse.getSource().getDynamicLast4());
-
-        Assert.assertEquals(authorizationResponse.getSource().getExpMonth(), 12);
-        Assert.assertEquals(authorizationResponse.getSource().getExpYear(), 2019);
-        Assert.assertEquals(authorizationResponse.getSource().getFingerPrint(), "Xt5EWLLDS7FJjR1c");
-        Assert.assertEquals(authorizationResponse.getSource().getFunding(), "credit");
-        Assert.assertEquals(authorizationResponse.getSource().getLast4(), "4242");
-
-        // Metadata appeared in the JSON response, then it is not null object, just an empty node!
-        Assert.assertNotNull(authorizationResponse.getSource().getMetadata());
-
-        Assert.assertNull(authorizationResponse.getSource().getName());
-        Assert.assertNull(authorizationResponse.getSource().getTokenizationMethod());
-        Assert.assertNull(authorizationResponse.getError());
+        // Assertion
+        expectedResponse.assertEquals(authorizationResponse);
     }
 
 
@@ -244,21 +224,18 @@ public class AuthorizationServiceImplServiceTest {
         // Deserialize JSON response
         AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
 
-        // Assert response values
-        Assert.assertNull(authorizationResponse.getId());
-        Assert.assertNull(authorizationResponse.getObject());
-        Assert.assertEquals(authorizationResponse.getAmount(), 0f);
-        Assert.assertEquals(authorizationResponse.getCreated(), 0);
-        Assert.assertNull(authorizationResponse.getCurrency());
-        Assert.assertNull(authorizationResponse.getCustomer());
-        Assert.assertNull(authorizationResponse.getDescription());
-        Assert.assertNull(authorizationResponse.getStatus());
+        // Prepare expected data
+        AuthorizationResponse expectedResponse = new AuthorizationResponse();
+        expectedResponse.setAmount(0f);
+        expectedResponse.setCreated(0);
 
-        Assert.assertNull(authorizationResponse.getOutcome());
-        Assert.assertNull(authorizationResponse.getSource());
+        AuthorizationResponseError error = new AuthorizationResponseError();
+        error.setMessage("Invalid Primary Account Number provided");
+        error.setType("invalid_request_error");
+        expectedResponse.setError(error);
 
-        Assert.assertEquals(authorizationResponse.getError().getMessage(), "Invalid Primary Account Number provided");
-        Assert.assertEquals(authorizationResponse.getError().getType(), "invalid_request_error");
+        // Assertion
+        expectedResponse.assertEquals(authorizationResponse);
     }
 
     /**
@@ -277,51 +254,40 @@ public class AuthorizationServiceImplServiceTest {
         // Deserialize JSON response
         AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
 
-        // Assert response values
-        Assert.assertEquals(authorizationResponse.getAmount(), 2500f);
+        // Prepare expected data
+        AuthorizationResponse expectedResponse = new AuthorizationResponse();
+        expectedResponse.setAmount(2500f);
 
-        Assert.assertEquals(authorizationResponse.getId(), "ch_1DiD402eZvKYlo2Cz8XicVgK");
-        Assert.assertEquals(authorizationResponse.getObject(), "charge");
-        Assert.assertEquals(authorizationResponse.getCreated(), 1545018400);
-        Assert.assertEquals(authorizationResponse.getCurrency(), "usd");
-        Assert.assertNull(authorizationResponse.getCustomer());
-        Assert.assertEquals(authorizationResponse.getDescription(), "Successful charge");
-        Assert.assertEquals(authorizationResponse.getStatus(), "succeeded");
+        expectedResponse.setId("ch_1DiD402eZvKYlo2Cz8XicVgK");
+        expectedResponse.setObject("charge");
+        expectedResponse.setCreated(1545018400);
+        expectedResponse.setCurrency("usd");
+        expectedResponse.setDescription("Successful charge");
+        expectedResponse.setStatus("succeeded");
 
-        Assert.assertEquals(authorizationResponse.getOutcome().getNetworkStatus(), "approved_by_network");
-        Assert.assertNull(authorizationResponse.getOutcome().getReason());
-        Assert.assertEquals(authorizationResponse.getOutcome().getRiskLevel(), "normal");
-        Assert.assertEquals(authorizationResponse.getOutcome().getRiskScore(), 64);
-        Assert.assertEquals(authorizationResponse.getOutcome().getSellerMessage(), "Payment complete.");
-        Assert.assertEquals(authorizationResponse.getOutcome().getType(), "authorized");
+        AuthorizationResponseOutcome outcome = new AuthorizationResponseOutcome();
+        outcome.setNetworkStatus("approved_by_network");
+        outcome.setRiskLevel("normal");
+        outcome.setRiskScore(64);
+        outcome.setSellerMessage("Payment complete.");
+        outcome.setType("authorized");
+        expectedResponse.setOutcome(outcome);
 
-        Assert.assertEquals(authorizationResponse.getSource().getId(), "card_1DiD3z2eZvKYlo2CilH44yQY");
-        Assert.assertEquals(authorizationResponse.getSource().getObject(), "card");
-        Assert.assertNull(authorizationResponse.getSource().getAddressCity());
-        Assert.assertNull(authorizationResponse.getSource().getAddressCountry());
-        Assert.assertNull(authorizationResponse.getSource().getAddressLine1());
-        Assert.assertNull(authorizationResponse.getSource().getAddressLine1Check());
-        Assert.assertNull(authorizationResponse.getSource().getAddressLine2());
-        Assert.assertNull(authorizationResponse.getSource().getAddressState());
-        Assert.assertNull(authorizationResponse.getSource().getAddressZip());
-        Assert.assertNull(authorizationResponse.getSource().getAddressZipCheck());
+        AuthorizationResponseSource source = new AuthorizationResponseSource();
+        source.setId("card_1DiD3z2eZvKYlo2CilH44yQY");
+        source.setObject("card");
+        source.setBrand("Visa");
+        source.setCountry("US");
+        source.setExpMonth(12);
+        source.setExpYear(2019);
+        source.setFingerprint("Xt5EWLLDS7FJjR1c");
+        source.setFunding("credit");
+        source.setLast4("4242");
+        source.setMetadata(new AuthorizationResponseSourceMetadata());
+        expectedResponse.setSource(source);
 
-        Assert.assertEquals(authorizationResponse.getSource().getBrand(), "Visa");
-        Assert.assertEquals(authorizationResponse.getSource().getCountry(), "US");
-        Assert.assertNull(authorizationResponse.getSource().getCustomer());
-        Assert.assertNull(authorizationResponse.getSource().getCvcCheck());
-        Assert.assertNull(authorizationResponse.getSource().getDynamicLast4());
-
-        Assert.assertEquals(authorizationResponse.getSource().getExpMonth(), 12);
-        Assert.assertEquals(authorizationResponse.getSource().getExpYear(), 2019);
-        Assert.assertEquals(authorizationResponse.getSource().getFingerPrint(), "Xt5EWLLDS7FJjR1c");
-        Assert.assertEquals(authorizationResponse.getSource().getFunding(), "credit");
-        Assert.assertEquals(authorizationResponse.getSource().getLast4(), "4242");
-        Assert.assertNotNull(authorizationResponse.getSource().getMetadata());
-
-        Assert.assertNull(authorizationResponse.getSource().getName());
-        Assert.assertNull(authorizationResponse.getSource().getTokenizationMethod());
-        Assert.assertNull(authorizationResponse.getError());
+        // Assertion
+        expectedResponse.assertEquals(authorizationResponse);
     }
 
     /**
@@ -340,50 +306,39 @@ public class AuthorizationServiceImplServiceTest {
         // Deserialize JSON response
         AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
 
-        // Assert response values
-        Assert.assertEquals(authorizationResponse.getAmount(), 2500f);
-        Assert.assertEquals(authorizationResponse.getCurrency(), "vnd");
+        // Prepare expected data
+        AuthorizationResponse expectedResponse = new AuthorizationResponse();
+        expectedResponse.setAmount(2500f);
+        expectedResponse.setCurrency("vnd");
 
-        Assert.assertEquals(authorizationResponse.getId(), "ch_1DiD402eZvKYlo2Cz8XicVgK");
-        Assert.assertEquals(authorizationResponse.getObject(), "charge");
-        Assert.assertEquals(authorizationResponse.getCreated(), 1545018400);
-        Assert.assertNull(authorizationResponse.getCustomer());
-        Assert.assertEquals(authorizationResponse.getDescription(), "Successful charge");
-        Assert.assertEquals(authorizationResponse.getStatus(), "succeeded");
+        expectedResponse.setId("ch_1DiD402eZvKYlo2Cz8XicVgK");
+        expectedResponse.setObject("charge");
+        expectedResponse.setCreated(1545018400);
+        expectedResponse.setDescription("Successful charge");
+        expectedResponse.setStatus("succeeded");
 
-        Assert.assertEquals(authorizationResponse.getOutcome().getNetworkStatus(), "approved_by_network");
-        Assert.assertNull(authorizationResponse.getOutcome().getReason());
-        Assert.assertEquals(authorizationResponse.getOutcome().getRiskLevel(), "normal");
-        Assert.assertEquals(authorizationResponse.getOutcome().getRiskScore(), 64);
-        Assert.assertEquals(authorizationResponse.getOutcome().getSellerMessage(), "Payment complete.");
-        Assert.assertEquals(authorizationResponse.getOutcome().getType(), "authorized");
+        AuthorizationResponseOutcome outcome = new AuthorizationResponseOutcome();
+        outcome.setNetworkStatus("approved_by_network");
+        outcome.setRiskLevel("normal");
+        outcome.setRiskScore(64);
+        outcome.setSellerMessage("Payment complete.");
+        outcome.setType("authorized");
+        expectedResponse.setOutcome(outcome);
 
-        Assert.assertEquals(authorizationResponse.getSource().getId(), "card_1DiD3z2eZvKYlo2CilH44yQY");
-        Assert.assertEquals(authorizationResponse.getSource().getObject(), "card");
-        Assert.assertNull(authorizationResponse.getSource().getAddressCity());
-        Assert.assertNull(authorizationResponse.getSource().getAddressCountry());
-        Assert.assertNull(authorizationResponse.getSource().getAddressLine1());
-        Assert.assertNull(authorizationResponse.getSource().getAddressLine1Check());
-        Assert.assertNull(authorizationResponse.getSource().getAddressLine2());
-        Assert.assertNull(authorizationResponse.getSource().getAddressState());
-        Assert.assertNull(authorizationResponse.getSource().getAddressZip());
-        Assert.assertNull(authorizationResponse.getSource().getAddressZipCheck());
+        AuthorizationResponseSource source = new AuthorizationResponseSource();
+        source.setId("card_1DiD3z2eZvKYlo2CilH44yQY");
+        source.setObject("card");
+        source.setBrand("Visa");
+        source.setCountry("US");
+        source.setExpMonth(12);
+        source.setExpYear(2019);
+        source.setFingerprint("Xt5EWLLDS7FJjR1c");
+        source.setFunding("credit");
+        source.setLast4("4242");
+        source.setMetadata(new AuthorizationResponseSourceMetadata());
+        expectedResponse.setSource(source);
 
-        Assert.assertEquals(authorizationResponse.getSource().getBrand(), "Visa");
-        Assert.assertEquals(authorizationResponse.getSource().getCountry(), "US");
-        Assert.assertNull(authorizationResponse.getSource().getCustomer());
-        Assert.assertNull(authorizationResponse.getSource().getCvcCheck());
-        Assert.assertNull(authorizationResponse.getSource().getDynamicLast4());
-
-        Assert.assertEquals(authorizationResponse.getSource().getExpMonth(), 12);
-        Assert.assertEquals(authorizationResponse.getSource().getExpYear(), 2019);
-        Assert.assertEquals(authorizationResponse.getSource().getFingerPrint(), "Xt5EWLLDS7FJjR1c");
-        Assert.assertEquals(authorizationResponse.getSource().getFunding(), "credit");
-        Assert.assertEquals(authorizationResponse.getSource().getLast4(), "4242");
-        Assert.assertNotNull(authorizationResponse.getSource().getMetadata());
-
-        Assert.assertNull(authorizationResponse.getSource().getName());
-        Assert.assertNull(authorizationResponse.getSource().getTokenizationMethod());
-        Assert.assertNull(authorizationResponse.getError());
+        // Assertion
+        expectedResponse.assertEquals(authorizationResponse);
     }
 }
