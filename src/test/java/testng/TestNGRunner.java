@@ -6,14 +6,14 @@ import org.testng.collections.Lists;
 import java.io.*;
 import java.util.List;
 
-public class MainClass {
+public class TestNGRunner {
 
     public static void main(String[] args) throws IOException {
 
         String xmlFile = "testng.xml";
 
         // Get the content of testng.xml
-        ClassLoader classLoader = MainClass.class.getClassLoader();
+        ClassLoader classLoader = TestNGRunner.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(xmlFile);
 
         assert inputStream != null;
