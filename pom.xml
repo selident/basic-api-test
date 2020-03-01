@@ -13,13 +13,14 @@
     </developers>
 
     <groupId>io.github.selident</groupId>
-    <artifactId>basic-api-test</artifactId>
+    <artifactId>basic-api-test-stage</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <assembly.plugin.version>3.1.1</assembly.plugin.version>
         <testng.version>6.10</testng.version>
         <assured.version>4.2.0</assured.version>
         <log4j.version>1.2.17</log4j.version>
@@ -48,5 +49,35 @@
             <version>${gson.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${assembly.plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>testng.MainClass</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptors>src/main/resources/assembly.xml</descriptors>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
