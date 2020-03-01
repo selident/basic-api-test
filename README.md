@@ -71,7 +71,12 @@ Other Integrations:
 
     Note: This flow has been done on Github Actions for this repo.
     You can have a look on [Pull Requests page](https://github.com/selident/basic-api-test/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Aclosed+).
-    
+
+    This API test suite is designed to run with JAVA 11, so you may see the following waring message.
+    It is a warning, not an error. No worries about it. We do not use Groovy in our test suite.
+
+  ![image](https://github.com/selident/basic-api-test/blob/master/.github/images/8.png)
+
 ### Details of Implementation ###
 
   ![image](https://github.com/selident/basic-api-test/blob/master/.github/images/2.png)
