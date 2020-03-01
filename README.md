@@ -90,6 +90,9 @@ Other Integrations:
     2. AuthorizationServiceImplServiceTest: to test API call and normalize methods
     3. TestNGRunner: the runner to run test when using JAR file 
     
+    Note: There are some `additional tests` were disabled, because they are failing.
+    When writing required tests, we assumed that the current responses from API were correct. 
+    
     ![image](https://github.com/selident/basic-api-test/blob/master/.github/images/4.png)
     
   * **Others**
