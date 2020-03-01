@@ -59,7 +59,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>testng.MainClass</mainClass>
+                            <mainClass>testng.TestNGRunner</mainClass>
                         </manifest>
                     </archive>
                     <descriptors>src/main/resources/assembly.xml</descriptors>
