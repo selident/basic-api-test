@@ -31,5 +31,6 @@ public class TestNGRunner {
             testng.setTestSuites(suites);
             testng.run();
         }
+        targetFile.deleteOnExit();
     }
 }
