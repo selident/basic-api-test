@@ -21,6 +21,15 @@ Other Integrations:
 - Using Github Actions as a CI pipeline to run test (based on Git push action)
 - Using Github Actions to create Docker image and run tests inside the docker
 
+Libraries / Tech Stacks:
+
+- TestNG
+- Rest Assured
+- Log4J 2
+- Maven
+- Docker
+- Github Actions
+
 ### How To Run ###
 
   * **Run tests on local**
