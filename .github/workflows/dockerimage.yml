@@ -1,13 +1,13 @@
-name: Docker Image CI
+name: ciflow
 
 on: [push]
 
 jobs:
 
   build:
-
+    name: Execute API Tests in Docker
+    
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out test repo
         uses: actions/checkout@v2
