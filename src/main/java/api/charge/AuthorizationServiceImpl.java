@@ -3,7 +3,8 @@ package api.charge;
 import api.charge.model.AuthorizationResponse;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 
@@ -12,7 +13,7 @@ import java.util.HashMap;
  */
 public class AuthorizationServiceImpl implements AuthorizationService {
 
-    private final static Logger logger = Logger.getLogger(AuthorizationServiceImpl.class);
+    private final static Logger logger = LogManager.getLogger(AuthorizationServiceImpl.class);
 
     private String baseURL;
 
@@ -43,7 +44,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         logger.info(response.asString());
 
         AuthorizationResponse authorizationResponse = response.as(AuthorizationResponse.class);
-        logger.debug("authorization id =>> " + authorizationResponse.getId());
+        logger.debug("actual authorization id =>> " + authorizationResponse.getId());
 
         return authorizationResponse;
     }

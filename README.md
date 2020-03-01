@@ -97,10 +97,10 @@ Other Integrations:
     1. Dockerfile: to create docker image
     2. `.github`: to setup Github Actions for running test inside docker or running test directly
     
-        ![image](https://github.com/selident/basic-api-test/blob/master/.github/images/5.png)
+    ![image](https://github.com/selident/basic-api-test/blob/master/.github/images/5.png)
 
     3. Report after tests
        
-        ![image](https://github.com/selident/basic-api-test/blob/master/.github/images/6.png)
+    ![image](https://github.com/selident/basic-api-test/blob/master/.github/images/6.png)
         
-        ![image](https://github.com/selident/basic-api-test/blob/master/.github/images/7.png)
+    ![image](https://github.com/selident/basic-api-test/blob/master/.github/images/7.png)
