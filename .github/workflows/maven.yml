@@ -1,13 +1,12 @@
-name: Java CI - Execute API Tests
+name: ciflow
 
 on: [push]
 
 jobs:
-
   build:
-
+    name: Java CI - Execute API Tests
+    
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out test repo
         uses: actions/checkout@v2
