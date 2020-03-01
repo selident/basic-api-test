@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class AuthorizationResponseTest {
 
     @Test
-    public void assertAuthorizationResponse_EqualsTest() {
+    public void assertEquals_EqualsResponse_NoAssertionErrorTest() {
 
         AuthorizationResponseOutcome outcome = new AuthorizationResponseOutcome();
         outcome.setNetworkStatus("approved_by_network");
@@ -62,7 +62,7 @@ public class AuthorizationResponseTest {
     }
 
     @Test
-    public void assertAuthorizationResponse_NotEqualsTest() {
+    public void assertEquals_NotEqualsResponse_AssertionErrorTest() {
 
         AuthorizationResponseOutcome outcome = new AuthorizationResponseOutcome();
         outcome.setNetworkStatus("approved_by_network");

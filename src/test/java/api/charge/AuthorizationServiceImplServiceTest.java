@@ -19,16 +19,16 @@ public class AuthorizationServiceImplServiceTest {
     AuthorizationService authorizationService = new AuthorizationServiceImpl(BASE_URL);
 
     @Test
-    public void chargeAuthorizationInvalidCreditCardNumberTest() {
+    public void authorize_InvalidCreditCardNumber_InvalidRequestErrorTest() {
 
         // Call API and get response
-        Response response = authorizationService.getResponse("40000007600000", 999f, "usd");
+        Response response = authorizationService.authorize("40000007600000", 999f, "usd");
         response.then().assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON);
 
         // Deserialize JSON response
-        AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
+        AuthorizationResponse authorizationResponse = authorizationService.normalizeAuthorizeResponse(response);
 
         // Prepare expected data
         AuthorizationResponse expectedResponse = new AuthorizationResponse();
@@ -45,16 +45,16 @@ public class AuthorizationServiceImplServiceTest {
     }
 
     @Test
-    public void chargeAuthorizationStolenCardTest() {
+    public void authorize_StolenCard_IssuerDeclinedTest() {
 
         // Call API and get response
-        Response response = authorizationService.getResponse("4000000000009979", 999f, "usd");
+        Response response = authorizationService.authorize("4000000000009979", 999f, "usd");
         response.then().assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON);
 
         // Deserialize JSON response
-        AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
+        AuthorizationResponse authorizationResponse = authorizationService.normalizeAuthorizeResponse(response);
 
         // Prepare expected data
         AuthorizationResponse expectedResponse = new AuthorizationResponse();
@@ -73,16 +73,16 @@ public class AuthorizationServiceImplServiceTest {
     }
 
     @Test
-    public void chargeAuthorizationInsufficientFundsTest() {
+    public void authorize_InsufficientFunds_IssuerDeclinedTest() {
 
         // Call API and get response
-        Response response = authorizationService.getResponse("4000000000009995", 999f, "usd");
+        Response response = authorizationService.authorize("4000000000009995", 999f, "usd");
         response.then().assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON);
 
         // Deserialize JSON response
-        AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
+        AuthorizationResponse authorizationResponse = authorizationService.normalizeAuthorizeResponse(response);
 
         // Prepare expected data
         AuthorizationResponse expectedResponse = new AuthorizationResponse();
@@ -101,16 +101,16 @@ public class AuthorizationServiceImplServiceTest {
     }
 
     @Test
-    public void chargeAuthorizationLostCardTest() {
+    public void authorize_LostCard_IssuerDeclinedTest() {
 
         // Call API and get response
-        Response response = authorizationService.getResponse("4000000000009987", 999f, "usd");
+        Response response = authorizationService.authorize("4000000000009987", 999f, "usd");
         response.then().assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON);
 
         // Deserialize JSON response
-        AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
+        AuthorizationResponse authorizationResponse = authorizationService.normalizeAuthorizeResponse(response);
 
         // Prepare expected data
         AuthorizationResponse expectedResponse = new AuthorizationResponse();
@@ -129,16 +129,16 @@ public class AuthorizationServiceImplServiceTest {
     }
 
     @Test
-    public void chargeAuthorizationFraudulentBlockedTest() {
+    public void authorize_Fraudulent_BlockedTest() {
 
         // Call API and get response
-        Response response = authorizationService.getResponse("4100000000000019", 999f, "usd");
+        Response response = authorizationService.authorize("4100000000000019", 999f, "usd");
         response.then().assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON);
 
         // Deserialize JSON response
-        AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
+        AuthorizationResponse authorizationResponse = authorizationService.normalizeAuthorizeResponse(response);
 
         // Prepare expected data
         AuthorizationResponse expectedResponse = new AuthorizationResponse();
@@ -165,16 +165,16 @@ public class AuthorizationServiceImplServiceTest {
     }
 
     @Test
-    public void chargeAuthorizationCreatedSuccessfullyTest() {
+    public void authorize_CreatedSuccessfully_AuthorizedTest() {
 
         // Call API and get response
-        Response response = authorizationService.getResponse("4242424242424242", 999f, "usd");
+        Response response = authorizationService.authorize("4242424242424242", 999f, "usd");
         response.then().assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON);
 
         // Deserialize JSON response
-        AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
+        AuthorizationResponse authorizationResponse = authorizationService.normalizeAuthorizeResponse(response);
 
         // Prepare expected data
         AuthorizationResponse expectedResponse = new AuthorizationResponse();
@@ -211,22 +211,21 @@ public class AuthorizationServiceImplServiceTest {
         expectedResponse.assertEquals(authorizationResponse);
     }
 
-
     /**
      * Additional test which were not listed in the exercise.
      * 1234567890 is not a valid credit card, the expectation for this test is the same with invalid credit card test!
      */
     //@Test
-    public void chargeAuthorizationOutOfTheBox_NotFoundCardNumTest() {
+    public void authorize_NotFoundCardNumber_InvalidRequestErrorTest() {
 
         // Call API and get response
-        Response response = authorizationService.getResponse("1234567890", 999f, "usd");
+        Response response = authorizationService.authorize("1234567890", 999f, "usd");
         response.then().assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON);
 
         // Deserialize JSON response
-        AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
+        AuthorizationResponse authorizationResponse = authorizationService.normalizeAuthorizeResponse(response);
 
         // Prepare expected data
         AuthorizationResponse expectedResponse = new AuthorizationResponse();
@@ -247,16 +246,16 @@ public class AuthorizationServiceImplServiceTest {
      * We can extend this test by sending really big big or negative numbers! but it seems the API only returned fixed values.
      */
     //@Test
-    public void chargeAuthorizationOutOfTheBox_ChangingAmountTest() {
+    public void authorize_ChangeAmount_ReturnCorrespondingAmountTest() {
 
         // Call API and get response
-        Response response = authorizationService.getResponse("4242424242424242", 2500f, "usd");
+        Response response = authorizationService.authorize("4242424242424242", 2500f, "usd");
         response.then().assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON);
 
         // Deserialize JSON response
-        AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
+        AuthorizationResponse authorizationResponse = authorizationService.normalizeAuthorizeResponse(response);
 
         // Prepare expected data
         AuthorizationResponse expectedResponse = new AuthorizationResponse();
@@ -299,16 +298,16 @@ public class AuthorizationServiceImplServiceTest {
      * We can extend this test by sending invalid currencies! but it seems the API only returned fixed values.
      */
     //@Test
-    public void chargeAuthorizationOutOfTheBox_ChangingCurrencyTest() {
+    public void authorize_ChangeCurrency_ReturnCorrespondingCurrencyTest() {
 
         // Call API and get response
-        Response response = authorizationService.getResponse("4242424242424242", 2500f, "vnd");
+        Response response = authorizationService.authorize("4242424242424242", 2500f, "vnd");
         response.then().assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON);
 
         // Deserialize JSON response
-        AuthorizationResponse authorizationResponse = authorizationService.normalizeResponse(response);
+        AuthorizationResponse authorizationResponse = authorizationService.normalizeAuthorizeResponse(response);
 
         // Prepare expected data
         AuthorizationResponse expectedResponse = new AuthorizationResponse();

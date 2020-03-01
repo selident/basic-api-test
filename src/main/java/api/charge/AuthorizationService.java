@@ -10,7 +10,7 @@ import io.restassured.response.Response;
  */
 public interface AuthorizationService {
 
-    public Response getResponse(String creditCardNum, float amount, String currency);
+    public Response authorize(String creditCardNum, float amount, String currency);
 
-    public AuthorizationResponse normalizeResponse(Response response);
+    public AuthorizationResponse normalizeAuthorizeResponse(Response response);
 }

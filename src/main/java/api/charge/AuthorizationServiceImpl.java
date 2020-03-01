@@ -22,7 +22,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
-    public Response getResponse(String creditCardNum, float amount, String currency) {
+    public Response authorize(String creditCardNum, float amount, String currency) {
 
         HashMap<String, Object> params = new HashMap<>();
         params.put("amount", amount);
@@ -39,7 +39,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
-    public AuthorizationResponse normalizeResponse(Response response) {
+    public AuthorizationResponse normalizeAuthorizeResponse(Response response) {
 
         logger.info(response.asString());
 
